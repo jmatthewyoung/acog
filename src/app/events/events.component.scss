@@ -1,0 +1,14 @@
+@import '../../variables.scss';
+
+.calendar-wrap {
+    background-color: $white;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.calendar {
+    width: 100%;
+    min-width: 420px;
+}

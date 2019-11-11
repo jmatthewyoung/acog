@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.title {
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-bottom: 1px solid $dark-gray;
+}
+
+.image-wrap {
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.details {
+    padding: 1rem;
+}

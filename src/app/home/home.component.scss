@@ -1,0 +1,47 @@
+@import '../../variables.scss';
+
+.church-logo {
+  margin-bottom: 2rem;
+}
+
+.worship-services {
+  padding: 1rem;
+  background: #1e577394;
+}
+
+// .welcome-block {
+//   // max-width: 60%;
+// }
+
+.page {
+  background-color: $white;
+  padding: 1rem;
+  color: $dark-gray;
+  border-radius: 4px;
+  margin: 2rem 0 2rem 0;
+}
+
+.service-logo-wrap {
+  margin-top: -2rem;
+  padding-bottom: 2rem;
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 0rem;
+    padding-bottom: 0rem;
+  }
+
+  .service-logo {
+    width: 100%;
+    max-width: 420px;
+
+    @media only screen and (max-width: 768px) {
+      max-width: 350px;
+    }
+  }
+}
+
+.saint-quote {
+  width: 100%;
+  max-width: 350px;
+  padding-top: 1rem;
+}

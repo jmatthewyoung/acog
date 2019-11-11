@@ -1,0 +1,84 @@
+@import '../../variables.scss';
+
+// .nav-item {
+//   & .active {
+//     border-bottom: 3px solid white;
+//     border-radius: 0%;
+//   }
+
+//   margin: 0 5%;
+// }
+
+// .shadowText {
+//   background-color: initial !important;
+//   color: #fff;
+// }
+
+// .headerRow {
+//     margin-bottom: 2rem;
+// }
+
+// .card {
+//     color: #000;
+//     padding-top: 1%;
+// }
+
+// .play-icon {
+//     font-size: 10rem;
+// }
+
+// .tab-title-text {
+//     &.active {
+//         border-bottom: 3px solid white;
+//     }
+
+//     &:hover {
+//         cursor: pointer;
+//     }
+// }
+
+.page {
+  margin: 0;
+  margin-top: 2rem;
+  color: $dark-gray;
+
+  .header-row {
+    background-color: transparent;
+
+    .tab {
+      border-radius: 4px 4px 0 0;
+      padding: .5rem 1rem;
+      background-color: $background-gray;
+      text-align: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      @media (max-width: 767px) {
+        border-radius: 0 0 0 0;
+        border-top: 1px solid $dark-gray;
+
+        .mobile-header {
+          display: block;
+          padding-bottom: .5rem;
+        }
+      }
+    }
+
+    .active-tab {
+      background-color: $white;
+    }
+  }
+
+  .content-row {
+    background-color: $white;
+    padding: 1rem;
+  }
+}
+
+.mobile-border {
+  @media (max-width: 767px) {
+    border-bottom: 1px solid $dark-gray;
+  }
+}

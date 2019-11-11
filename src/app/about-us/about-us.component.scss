@@ -1,0 +1,33 @@
+@import '../../variables.scss';
+
+.panel-content {
+    color: white;
+    padding-bottom: 1rem;
+}
+
+.page {
+    background-color: rgba(100,100,100,0.8);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.acc-panel-header {
+    border-bottom: 1px solid white;
+
+    .header-text {
+        font-size: 1.75rem;
+        font-weight: 300;
+        cursor: pointer;
+        display: inline;
+    }
+}
+
+.chevron {
+    float:right;
+    padding-top: .75rem;
+}
+
+.mt-6 {
+    margin-top: 2rem;
+}

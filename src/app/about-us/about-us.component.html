@@ -1,0 +1,50 @@
+<div class="container mt-6">
+    <div class="acc-panel">
+        <div (click)="togglePanelIndex(0)" class="acc-panel-header">
+            <div class="header-text">Staff</div>
+            <fa-icon class="chevron" [icon]="accPanelIndexes[0] ? faChevronDown : faChevronUp"></fa-icon>
+        </div>
+        <div *ngIf="accPanelIndexes[0]" class="panel-content">
+            <ngb-carousel>
+                <ng-template *ngFor="let staffPage of staffPages" ngbSlide>
+                    <div class="row mx-0">
+                        <div *ngFor="let staffMember of staffPage" class="col-lg-3 col-md-4 col-sm-6 col-12 py-3">
+                            <app-staff-card [staffMember]="staffMember"></app-staff-card>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+    <div class="acc-panel">
+        <div (click)="togglePanelIndex(1)" class="acc-panel-header">
+            <div class="header-text">Ministry</div>
+            <fa-icon class="chevron" [icon]="accPanelIndexes[1] ? faChevronDown : faChevronUp"></fa-icon>
+        </div>
+        <div *ngIf="accPanelIndexes[1]" class="panel-content">
+            <div class="row mx-0">
+                <div *ngFor="let ministry of ministries" class="col-lg-3 col-md-4 col-sm-6 col-12 py-3">
+                    <app-ministry-card [ministry]="ministry"></app-ministry-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="acc-panel">
+        <div (click)="togglePanelIndex(2)" class="acc-panel-header">
+            <div class="header-text">Beliefs</div>
+            <fa-icon class="chevron" [icon]="accPanelIndexes[2] ? faChevronDown : faChevronUp"></fa-icon>
+        </div>
+        <div *ngIf="accPanelIndexes[2]" class="panel-content page">
+            <div [innerHTML]="beliefs ? beliefs.content.resolveHtml() : ''"></div>
+        </div>
+    </div>
+    <div class="acc-panel">
+        <div (click)="togglePanelIndex(3)" class="acc-panel-header">
+            <div class="header-text">History</div>
+            <fa-icon class="chevron" [icon]="accPanelIndexes[3] ? faChevronDown : faChevronUp"></fa-icon>
+        </div>
+        <div *ngIf="accPanelIndexes[3]" class="panel-content page">
+            <div [innerHTML]="history ? history.content.resolveHtml() : ''"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div (click)="open()" class="staff-card row mx-0">
+    <div class="col-12 px-0">
+        <div class="img-wrap">
+            <img class="image" [src]="staffMember.picture.value.length > 0 ? staffMember.picture.value[0].url : ''"
+            alt="staffMember.picture.value.length >0 ? staffMember.picture.value[0].description : ''" />
+        </div>
+    </div>
+    <div class="col-12 px-0 py-3">
+        <div class="name">{{ staffMember.name.value }}</div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html,
+body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.card-body {
+  padding: 0 !important;
+}
+
+.carousel-control-prev {
+  width: 7% !important;
+  height: 3rem;
+  margin: auto;
+  background-color: white;
+  border-radius: 0px 15px 15px 0px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.carousel-control-next {
+  width: 7% !important;
+  height: 3rem;
+  margin: auto;
+  background-color: white;
+  border-radius: 15px 0px 0px 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  padding: 1rem 0;
+  margin-bottom: 0;
+}

@@ -1,0 +1,11 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()"><label>
+        Name: <input class='form-control' type="text" formControlName="name">
+    </label>
+    <label>
+        Email: <input class='form-control' type="text" formControlName="email">
+    </label>
+    <label>
+        Comments: <input class='form-control' type="text" formControlName="comments">
+    </label>
+    <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row page">
+    <div class="col-12 header-row px-0">
+      <div class="row mobile-border mx-0">
+        <div [ngClass]="{'active-tab': activeTab === 'LIVE_STREAM'}" (click)="activeTab = 'LIVE_STREAM'"
+          class="col-12 col-md tab">
+          <span class="mobile-header">Live Streams</span>
+          <div *ngIf="activeTab === 'LIVE_STREAM'" class="d-block d-md-none">
+            <ng-container *ngTemplateOutlet="streamContent"></ng-container>
+          </div>
+        </div>
+        <div class="d-none d-md-block col-md-auto"></div>
+        <div [ngClass]="{'active-tab': activeTab === 'SERMON_AUDIO_ARCHIVE'}"
+          (click)="activeTab = 'SERMON_AUDIO_ARCHIVE'" class="col-12 col-md tab">
+          <span class="mobile-header">Sermon Audio Archive</span>
+          <div *ngIf="activeTab === 'SERMON_AUDIO_ARCHIVE'" class="d-block d-md-none">
+            <ng-container *ngTemplateOutlet="archiveContent"></ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'LIVE_STREAM'" class="col-12 d-none d-md-block content-row">
+      <ng-container *ngTemplateOutlet="streamContent"></ng-container>
+    </div>
+    <div *ngIf="activeTab === 'SERMON_AUDIO_ARCHIVE'" class="col-12 d-none d-md-block content-row">
+      <ng-container *ngTemplateOutlet="archiveContent"></ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #streamContent>
+  <div class="row mx-0">
+    <div *ngFor="let stream of streams" class="card text-center col-lg-4 col-md-3 col-12">
+      <img src="" class="card-img-top" alt="">
+      <h3 class='card-title'>{{stream.title.value}}</h3>
+      <div *ngIf="stream.description.resolveHtml().length > 11">
+        <div class="card-text" [innerHTML]="stream.description.resolveHtml()"></div>
+      </div>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe
+          [src]="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + stream.videoID.value)"
+          class="embed-responsive-item" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+      <p class='font-italic'>{{stream.ampm.value[0].codename.toUpperCase()}} service |
+        {{stream.dateRecorded.value.toLocaleDateString()}}</p>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #archiveContent>
+  <div class="row mx-0">
+    <div *ngFor="let sermon of sermons" class="card text-center col-lg-4 col-md-3 col-12">
+      <h3 class='card-title'>{{sermon.title.value}}</h3>
+      <div *ngIf="sermon.description.resolveHtml().length > 11">
+        <div class="card-text" [innerHTML]="sermon.description.resolveHtml()"></div>
+      </div>
+      <div>
+        <a href="{{sermon.audioFilePath.value}}" target="_blank">Listen here</a>
+      </div>
+      <p class='font-italic'>{{sermon.ampm.value[0].codename.toUpperCase()}} service |
+        {{sermon.dateRecorded.value.toLocaleDateString()}}</p>
+    </div>
+  </div>
+</ng-template>

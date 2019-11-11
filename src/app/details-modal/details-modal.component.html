@@ -1,0 +1,8 @@
+<div class="row mx-0">
+    <div class="col-12 title" [innerHTML]="title"></div>
+    <div *ngIf="imageSrc" class="col-12 image-wrap">
+        <img class="image" [src]="imageSrc"
+        alt="{{ imageAlt }}" />
+    </div>
+    <div class="col-12 details" [innerHTML]="details"></div>
+</div>

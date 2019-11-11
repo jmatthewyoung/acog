@@ -1,0 +1,17 @@
+@import '../../../variables.scss';
+
+.ministry-card {
+    color: black;
+    background-color: white;
+    padding: 1rem;
+    text-align: center;
+    
+    .name {
+        font-size: 1.25rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+}
