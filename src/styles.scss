@@ -1,5 +1,4 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-
 html,
 body {
   height: 100%;
@@ -41,4 +40,18 @@ body {
   font-size: 2rem;
   padding: 1rem 0;
   margin-bottom: 0;
+}
+
+.no-select {
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Opera and Firefox */
+}
+
+.justify-content-space-around {
+  justify-content: space-around;
 }

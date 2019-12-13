@@ -1,3 +1,20 @@
-<div *ngFor="let asset of assets">
-    <img class="image" [src]="asset.src" alt="asset.alt" />
+<h1 class="text-center">Pictures</h1>
+
+<div class="container">
+    <div class="row justify-content-space-around">
+        <div class="col-auto" *ngFor="let asset of assets">
+            <div class="image-card">
+                <div class="row">
+                    <div class="col-12 image-col">
+                        <img class="image" [src]="asset.src" [alt]="asset.alt" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 image-desc">
+                        {{ asset.alt }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

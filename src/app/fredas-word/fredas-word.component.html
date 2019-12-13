@@ -1,1 +1,7 @@
-<p>fredas-word works!</p>
+<div *ngFor="let fredasWord of fredasWordBulletins">
+    <div (click)="open(fredasWord.title.value, fredasWord.content.value)" class="ministry-card row mx-0">
+        <div class="col-12 name px-0 py-3">
+            {{ fredasWord.title.value }}
+        </div>
+    </div>
+</div>

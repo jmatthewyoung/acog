@@ -82,3 +82,31 @@
     border-bottom: 1px solid $dark-gray;
   }
 }
+
+.sermon-card {
+  width: 33.333333%;
+}
+
+.panel-content {
+  padding-bottom: 1rem;
+}
+
+.acc-panel-header {
+  border-bottom: 1px solid #c9c9c9;
+  cursor: pointer;
+
+  .header-text {
+      font-size: 1.75rem;
+      font-weight: 300;
+      display: inline;
+  }
+}
+
+.chevron {
+  float:right;
+  padding-top: .75rem;
+}
+
+.mt-6 {
+  margin-top: 2rem;
+}

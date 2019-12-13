@@ -22,14 +22,19 @@
     <div *ngIf="activeTab === 'LIVE_STREAM'" class="col-12 d-none d-md-block content-row">
       <ng-container *ngTemplateOutlet="streamContent"></ng-container>
     </div>
-    <div *ngIf="activeTab === 'SERMON_AUDIO_ARCHIVE'" class="col-12 d-none d-md-block content-row">
+    <div *ngIf="activeTab === 'SERMON_AUDIO_ARCHIVE'" class="col-12 d-none d-md-block content-row px-0">
       <ng-container *ngTemplateOutlet="archiveContent"></ng-container>
     </div>
   </div>
 </div>
 <ng-template #streamContent>
+  <div *ngIf="streams.length == 0" class="row text-center mx-0">
+    <div class="col py-5">
+      Check back soon!
+    </div>
+  </div>
   <div class="row mx-0">
-    <div *ngFor="let stream of streams" class="card text-center col-lg-4 col-md-3 col-12">
+    <div *ngFor="let stream of streams" class="card text-center col-lg-4 col-md-6 col-12">
       <img src="" class="card-img-top" alt="">
       <h3 class='card-title'>{{stream.title.value}}</h3>
       <div *ngIf="stream.description.resolveHtml().length > 11">
@@ -49,17 +54,105 @@
 
 
 <ng-template #archiveContent>
-  <div class="row mx-0">
-    <div *ngFor="let sermon of sermons" class="card text-center col-lg-4 col-md-3 col-12">
-      <h3 class='card-title'>{{sermon.title.value}}</h3>
-      <div *ngIf="sermon.description.resolveHtml().length > 11">
-        <div class="card-text" [innerHTML]="sermon.description.resolveHtml()"></div>
-      </div>
-      <div>
-        <a href="{{sermon.audioFilePath.value}}" target="_blank">Listen here</a>
-      </div>
-      <p class='font-italic'>{{sermon.ampm.value[0].codename.toUpperCase()}} service |
-        {{sermon.dateRecorded.value.toLocaleDateString()}}</p>
+  <div *ngIf="sermons.length == 0" class="row text-center mx-0">
+    <div class="col py-5">
+      Check back soon!
     </div>
+  </div>
+  <div class="row mx-0">
+
+    <div *ngFor="let filteredSermon of filteredSermons; index as i;" class="acc-panel col-12">
+      <div (click)="toggleSpeakerPanelIndex(i)" class="acc-panel-header">
+        <div class="header-text">{{filteredSermon.speaker}}</div>
+        <fa-icon class="chevron" [icon]="accSpeakerPanelIndexes[i] ? faChevronDown : faChevronUp"></fa-icon>
+      </div>
+      <div *ngIf="accSpeakerPanelIndexes[i]" class="panel-content">
+        <div class="row mx-0">
+          <div *ngFor="let filteredDateSermon of filteredSermon.sermonDates; index as j;" class="acc-panel col-12">
+            <div (click)="toggleDatesPanelIndex(filteredSermon.speaker, j)" class="acc-panel-header">
+              <div class="header-text">{{filteredDateSermon.date}}</div>
+              <fa-icon class="chevron"
+                [icon]="getDatesPanelIndex(filteredSermon.speaker, j) ? faChevronDown : faChevronUp"></fa-icon>
+            </div>
+            <div *ngIf="getDatesPanelIndex(filteredSermon.speaker, j)" class="panel-content">
+              <div class="row mx-0">
+                <ul style="list-style-type: none;">
+                  <li *ngFor="let sermon of filteredDateSermon.sermons;">
+                    {{sermon.title.value}} |
+                    {{sermon.dateRecorded.value.toLocaleDateString()}} |
+                    {{ (sermon.ampm.value.length > 0) ? sermon.ampm.value[0].name + " service | " : "" }}
+                    <a target="_blank" [href]="sermon.audioFilePath.value">Listen here</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="acc-panel">
+          <div (click)="togglePanelIndex(0)" class="acc-panel-header">
+              <div class="header-text">Staff</div>
+              <fa-icon class="chevron" [icon]="accPanelIndexes[0] ? faChevronDown : faChevronUp"></fa-icon>
+          </div>
+          <div *ngIf="accPanelIndexes[0]" class="panel-content">
+          <div class="row mx-0">
+              <div *ngFor="let staffMember of staff" class="col-lg-3 col-md-4 col-sm-6 col-12 py-3">
+                  <app-staff-card [staffMember]="staffMember"></app-staff-card>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div class="acc-panel">
+          <div (click)="togglePanelIndex(1)" class="acc-panel-header">
+              <div class="header-text">Ministry</div>
+              <fa-icon class="chevron" [icon]="accPanelIndexes[1] ? faChevronDown : faChevronUp"></fa-icon>
+          </div>
+          <div *ngIf="accPanelIndexes[1]" class="panel-content">
+              <div class="row mx-0">
+                  <div *ngFor="let ministry of ministries" class="col-lg-3 col-md-4 col-sm-6 col-12 py-3">
+                      <app-ministry-card [ministry]="ministry"></app-ministry-card>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="acc-panel">
+          <div (click)="togglePanelIndex(2)" class="acc-panel-header">
+              <div class="header-text">Beliefs</div>
+              <fa-icon class="chevron" [icon]="accPanelIndexes[2] ? faChevronDown : faChevronUp"></fa-icon>
+          </div>
+          <div *ngIf="accPanelIndexes[2]" class="panel-content page">
+              <div [innerHTML]="beliefs ? beliefs.content.resolveHtml() : ''"></div>
+          </div>
+      </div>
+      <div class="acc-panel">
+          <div (click)="togglePanelIndex(3)" class="acc-panel-header">
+              <div class="header-text">History</div>
+              <fa-icon class="chevron" [icon]="accPanelIndexes[3] ? faChevronDown : faChevronUp"></fa-icon>
+          </div>
+          <div *ngIf="accPanelIndexes[3]" class="panel-content page">
+              <div [innerHTML]="history ? history.content.resolveHtml() : ''"></div>
+          </div>
+      </div>
+ -->
+
+
+
+
+
+    <!-- <div *ngFor="let sermon of sermons" class="col-lg-4 col-md-6 col-12 py-3">
+      <div class="text-center card">
+        <h3 class='card-title'>{{sermon.title.value}}</h3>
+        <div *ngIf="sermon.description.resolveHtml().length > 11">
+          <div class="card-text" [innerHTML]="sermon.description.resolveHtml()"></div>
+        </div>
+        <div>
+          <a href="{{sermon.audioFilePath.value}}" target="_blank">Listen here</a>
+        </div>
+        <p class='font-italic'>{{sermon.ampm.value[0].codename.toUpperCase()}} service |
+          {{sermon.dateRecorded.value.toLocaleDateString()}}</p>
+      </div>
+    </div> -->
   </div>
 </ng-template>

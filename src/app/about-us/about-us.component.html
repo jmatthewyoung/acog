@@ -1,19 +1,16 @@
 <div class="container mt-6">
+    <h1 class="text-center">About Us</h1>
     <div class="acc-panel">
         <div (click)="togglePanelIndex(0)" class="acc-panel-header">
             <div class="header-text">Staff</div>
             <fa-icon class="chevron" [icon]="accPanelIndexes[0] ? faChevronDown : faChevronUp"></fa-icon>
         </div>
         <div *ngIf="accPanelIndexes[0]" class="panel-content">
-            <ngb-carousel>
-                <ng-template *ngFor="let staffPage of staffPages" ngbSlide>
-                    <div class="row mx-0">
-                        <div *ngFor="let staffMember of staffPage" class="col-lg-3 col-md-4 col-sm-6 col-12 py-3">
-                            <app-staff-card [staffMember]="staffMember"></app-staff-card>
-                        </div>
-                    </div>
-                </ng-template>
-            </ngb-carousel>
+        <div class="row mx-0">
+            <div *ngFor="let staffMember of staff" class="col-lg-3 col-md-4 col-sm-6 col-12 py-3">
+                <app-staff-card [staffMember]="staffMember"></app-staff-card>
+            </div>
+        </div>
         </div>
     </div>
     <div class="acc-panel">

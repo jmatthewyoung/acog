@@ -1,0 +1,14 @@
+@import '../../variables.scss';
+
+
+.page {
+    background-color: $white;
+    padding: 1rem;
+    color: $dark-gray;
+    border-radius: 4px;
+    margin: 2rem 0 2rem 0;
+}
+
+.information-row {
+    margin-top:2rem;
+}

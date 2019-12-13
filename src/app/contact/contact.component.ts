@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { EmailService } from '../email.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,22 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private emailService: EmailService, private toastr: ToastrService) { }
-
-  contactForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    comments: new FormControl('')
-  });
+  constructor() { }
 
   ngOnInit() {
 
-  }
-
-  onSubmit() {
-    const formData = this.contactForm.value;
-    this.emailService.sendEmail(formData.email, formData.name, formData.comments).subscribe((response) => {
-      console.log(response);
-    });
   }
 }

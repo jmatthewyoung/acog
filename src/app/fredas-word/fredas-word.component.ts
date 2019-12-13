@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FredasWord } from '../kenticoCloudModels/fredasWord';
 import { KenticoService } from '../kentico.service';
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetailsModalComponent } from '../details-modal/details-modal.component';
 
 @Component({
   selector: 'app-fredas-word',
@@ -10,13 +12,13 @@ import { Subscription } from 'rxjs';
 })
 export class FredasWordComponent implements OnInit {
 
-  constructor(private kentico: KenticoService) { }
+  constructor(private kentico: KenticoService, private modalService: NgbModal) { }
 
-  private fredasWordBulletins = new Array<FredasWord>();
+  fredasWordBulletins = new Array<FredasWord>();
   private subs = new Array<Subscription>();
 
   ngOnInit() {
-    this.subs.push(this.kentico.getHomePage().subscribe(response => {
+    this.subs.push(this.kentico.getFredasWordsBulletins().subscribe(response => {
       console.log(response);
       const data = response.items;
       this.fredasWordBulletins = new Array<FredasWord>();
@@ -25,5 +27,11 @@ export class FredasWordComponent implements OnInit {
       }
       console.log(this.fredasWordBulletins);
     }));
+  }
+
+  open(title, details) {
+    const modalRef = this.modalService.open(DetailsModalComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.details = details;
   }
 }

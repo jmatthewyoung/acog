@@ -1,0 +1,23 @@
+@import '../../variables.scss';
+
+.image-card {
+    padding: 1rem;
+    background-color: $white;
+    color: $dark-gray;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+
+    .image-col {
+        height: 10rem;
+        .image {
+            display: block;
+            max-height: 100%;
+            max-width: 100%;
+            margin: auto;
+        }
+    }
+    .image-desc {
+        font-size: 1.25rem;
+        margin-top: 1rem;
+    }
+}
