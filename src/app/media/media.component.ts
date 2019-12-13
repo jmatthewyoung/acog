@@ -32,9 +32,21 @@ export class MediaComponent implements OnInit {
 
   ngOnInit() {
     this.subs.push(this.kentico.getArchivedSermons().subscribe(response => {
-      console.log(response);
-      this.sermons = response.items as ArchivedSermon[];
-      console.log(this.sermons);
+      // console.log(response);
+      const sermons = response.items as ArchivedSermon[];
+
+      for (let i = 0; i < sermons.length; i++) {
+        for (let j = i + 1; j < sermons.length; j++) {
+          if (sermons[i].dateRecorded.value > sermons[j].dateRecorded.value) {
+            const tmp = sermons[j];
+            sermons[j] = sermons[i];
+            sermons[i] = tmp;
+          }
+        }
+      }
+
+      this.sermons = sermons;
+      //console.log(this.sermons);
 
       const speakers = new Array<string>();
       for (const i in this.sermons) {
@@ -87,17 +99,34 @@ export class MediaComponent implements OnInit {
             sermons: datesSermons
           });
         }
+
+        let sermonCount = 0;
+        for (const x in sermonsFilteredByDate) {
+          sermonCount += sermonsFilteredByDate[x].sermons.length;
+        }
+
         this.filteredSermons.push({
           speaker: sermonsFilteredBySpeaker[i].speaker,
-          sermonDates: sermonsFilteredByDate
+          sermonDates: sermonsFilteredByDate,
+          sermonCount
         });
+      }
+
+      for (let i = 0; i < this.filteredSermons.length; i++) {
+        for (let j = i + 1; j < this.filteredSermons.length; j++) {
+          if (this.filteredSermons[i].sermonCount < this.filteredSermons[j].sermonCount) {
+            const tmp = this.filteredSermons[j];
+            this.filteredSermons[j] = this.filteredSermons[i];
+            this.filteredSermons[i] = tmp;
+          }
+        }
       }
 
       for (const i in this.filteredSermons) {
         this.accSpeakerPanelIndexes.push(false);
 
         const dataIndexes = new Array<boolean>();
-        for(const j in this.filteredSermons[i].sermonDates){
+        for (const j in this.filteredSermons[i].sermonDates) {
           dataIndexes.push(false);
         }
         this.accDatePanels.push({
@@ -105,8 +134,8 @@ export class MediaComponent implements OnInit {
           indexes: dataIndexes
         });
       }
-      console.log(this.filteredSermons);
-      console.log(this.accDatePanels);
+      // console.log(this.filteredSermons);
+      // console.log(this.accDatePanels);
     }));
     this.subs.push(this.kentico.getLiveStreams().subscribe(response => {
       this.streams = response.items as LiveStream[];
@@ -115,20 +144,30 @@ export class MediaComponent implements OnInit {
   }
 
   toggleSpeakerPanelIndex(index: number) {
+    for (const y in this.accSpeakerPanelIndexes) {
+      if (y !== index.toString()) {
+        this.accSpeakerPanelIndexes[y] = false;
+      }
+    }
     this.accSpeakerPanelIndexes[index] = !this.accSpeakerPanelIndexes[index];
   }
 
   toggleDatesPanelIndex(speaker: string, index: number) {
-    for(const i in this.accDatePanels){
-      if(this.accDatePanels[i].speaker === speaker) {
+    for (const i in this.accDatePanels) {
+      if (this.accDatePanels[i].speaker === speaker) {
+        for (const y in this.accDatePanels[i].indexes) {
+          if (y !== index.toString()) {
+            this.accDatePanels[i].indexes[y] = false;
+          }
+        }
         this.accDatePanels[i].indexes[index] = !this.accDatePanels[i].indexes[index];
       }
     }
   }
 
   getDatesPanelIndex(speaker: string, index: number) {
-    for(const i in this.accDatePanels){
-      if(this.accDatePanels[i].speaker === speaker) {
+    for (const i in this.accDatePanels) {
+      if (this.accDatePanels[i].speaker === speaker) {
         return this.accDatePanels[i].indexes[index];
       }
     }

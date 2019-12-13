@@ -2,7 +2,7 @@ import { Pictures } from './kenticoCloudModels/pictures';
 import { LiveStream } from './kenticoCloudModels/liveStream';
 import { ArchivedSermon } from './kenticoCloudModels/archivedSermon';
 import { Injectable } from '@angular/core';
-import { TypeResolver, DeliveryClient } from '@kentico/kontent-delivery';
+import { TypeResolver, DeliveryClient, SortOrder } from '@kentico/kontent-delivery';
 import { Staff } from './kenticoCloudModels/staff';
 import { Ministry } from './kenticoCloudModels/ministry';
 import { HomePage } from './kenticoCloudModels/homePage';

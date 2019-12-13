@@ -63,14 +63,14 @@
 
     <div *ngFor="let filteredSermon of filteredSermons; index as i;" class="acc-panel col-12">
       <div (click)="toggleSpeakerPanelIndex(i)" class="acc-panel-header">
-        <div class="header-text">{{filteredSermon.speaker}}</div>
+        <div class="header-text">{{filteredSermon.speaker}} ({{filteredSermon.sermonCount}})</div>
         <fa-icon class="chevron" [icon]="accSpeakerPanelIndexes[i] ? faChevronDown : faChevronUp"></fa-icon>
       </div>
       <div *ngIf="accSpeakerPanelIndexes[i]" class="panel-content">
         <div class="row mx-0">
           <div *ngFor="let filteredDateSermon of filteredSermon.sermonDates; index as j;" class="acc-panel col-12">
             <div (click)="toggleDatesPanelIndex(filteredSermon.speaker, j)" class="acc-panel-header">
-              <div class="header-text">{{filteredDateSermon.date}}</div>
+              <div class="header-text">{{filteredDateSermon.date}} ({{filteredDateSermon.sermons.length}})</div>
               <fa-icon class="chevron"
                 [icon]="getDatesPanelIndex(filteredSermon.speaker, j) ? faChevronDown : faChevronUp"></fa-icon>
             </div>
